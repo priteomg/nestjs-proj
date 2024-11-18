@@ -14,6 +14,7 @@ import { UserModule } from './user/user.module';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
+      envFilePath: '.env',
     }),
     MongooseModule.forRoot(
       `mongodb+srv://priteomg:${process.env.DBpassword}@cluster0.b39ne.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`,
