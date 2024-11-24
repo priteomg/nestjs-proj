@@ -9,6 +9,7 @@ import {
 import { AuthService } from './auth.service';
 import { GoogleAuthGuard } from './google-auth.guard';
 import { LocalAuthGuard } from './local-auth.guard';
+import { JwtAuthGuard } from './jwt-auth.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -39,5 +40,13 @@ export class AuthController {
     res.cookie('access_token', access_token, { httpOnly: true });
 
     return { message: 'Login Successfully' };
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Post('logout')
+  async logout(@Response({ passthrough: true }) res) {
+    res.clearCookie('access_token');
+
+    return { message: 'Logout Successfully' };
   }
 }
